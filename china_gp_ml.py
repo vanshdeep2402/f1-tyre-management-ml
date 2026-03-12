@@ -1,37 +1,46 @@
 import fastf1
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt  # <--- This is the "Graph Maker"
 
-# 1. Setup a 'Cache'. F1 data is huge, this saves it on your PC 
-# so you don't have to download it every time you run the code.
+# 1. Setup Cache
 fastf1.Cache.enable_cache('f1_cache') 
 
-print("Fetching data from the 2024 Chinese GP...")
-
-# 2. Load the 2024 China Race ('R')
+# 2. Load 2024 China Race
 session = fastf1.get_session(2024, 'Shanghai', 'R')
 session.load()
 
-# 3. Pick a driver to study (Let's use Lewis Hamilton - HAM)
+# 3. Pick Lewis Hamilton
 driver_laps = session.laps.pick_driver('HAM')
-
-# 4. Clean the data. 
-# We only want 'accurate' laps (no pit stops, no safety cars)
-# because those mess up our tyre wear prediction.
 valuable_laps = driver_laps.pick_accurate()
 
-# 5. Get the data points for our ML model
-# X = Independent variable (Tyre Age)
-# y = Dependent variable (Lap Time in seconds)
+# 4. Prepare Data
 X = valuable_laps[['TyreLife']] 
 y = valuable_laps['LapTime'].dt.total_seconds()
 
-# 6. Initialize and Train the 'Brain' (The Model)
+# 5. Train Model
 model = LinearRegression()
 model.fit(X, y)
 
-# 7. Use the brain to predict!
-# If a tyre has lasted 15 laps, how slow will the next lap be?
-prediction = model.predict([[15]])
+# 6. --- NEW: THE GRAPH CODE ---
+plt.figure(figsize=(10, 6))
 
-print(f"Predicted lap time for Hamilton on lap 15: {prediction[0]:.3f} seconds")
+# Plot the real data points (dots)
+plt.scatter(X, y, color='blue', label='Actual Laps')
+
+# Plot the ML prediction line (red line)
+plt.plot(X, model.predict(X), color='red', linewidth=2, label='Degradation Trend')
+
+plt.title('Lewis Hamilton Tyre Degradation - Shanghai')
+plt.xlabel('Tyre Age (Laps)')
+plt.ylabel('Lap Time (Seconds)')
+plt.legend()
+plt.grid(True)
+
+# This saves the image to your folder so you can upload it to GitHub
+plt.savefig('tyre_plot.png')
+
+# This forces the window to pop up on your screen
+plt.show() 
+
+print("Prediction for lap 15:", model.predict([[15]])[0])
