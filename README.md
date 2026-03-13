@@ -5,7 +5,7 @@
 ### *Real-Time AI Strategy for the 2026 Chinese GP*
 
 <p align="center">
-  <img src="https://media.tenor.com/4H6TsnxQAvMAAAAM/lewis-hamilton-formula-1.gif" width="600">
+  <img src="https://media.tenor.com/4H6TsnxQAvMAAAAM/lewis-hamilton-formula-1.gif" width="100">
 </p>
 
 <div align="center">
