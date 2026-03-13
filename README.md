@@ -12,7 +12,7 @@
 <div align="center">
 
 ![F1](https://img.shields.io/badge/Formula_1-FF1801?style=for-the-badge&logo=formula1&logoColor=white) 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) 
+![Python](https://img.shields.io/badge/Python-EF1A2D?style=for-the-badge&logo=python&logoColor=white) 
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 
 </div>
