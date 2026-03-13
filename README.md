@@ -4,7 +4,7 @@
 ### *Real-Time AI Strategy for the 2026 Chinese GP*
 
 <p align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXhieXJ6emRxeWV4eHhxeXh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" width="600">
+  <img src="https://th.bing.com/th/id/OIP.suqfmb29JAOOOBybmZUxGgAAAA?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" width="300">
 </p>
 
 ![Era Comparison](comparison_plot.png)
