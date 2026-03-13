@@ -3,52 +3,47 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 
-# 1. Setup Cache - This keeps the data on your laptop
-fastf1.Cache.enable_cache('f1_cache') 
+fastf1.Cache.enable_cache('f1_cache')
 
-print("Fetching LIVE 2026 Chinese GP FP1 Data...")
-
-try:
-    # 2. Load the CURRENT 2026 Session (Line 10/11)
-    session = fastf1.get_session(2026, 'Shanghai', 'FP1')
+def get_driver_data(year, session_type, driver, color):
+    print(f"Loading {year} {session_type} data...")
+    session = fastf1.get_session(year, 'Shanghai', session_type)
     session.load()
-
-    # 3. Pick Lewis Hamilton (now in the Ferrari!)
-    driver_laps = session.laps.pick_driver('HAM')
+    laps = session.laps.pick_driver(driver).pick_accurate()
     
-    # 4. Clean the data for Practice (FP1)
-    # We only want 'accurate' laps and we filter out very slow 
-    # out-laps (anything slower than 107% of his best time)
-    valuable_laps = driver_laps.pick_accurate()
-    if not valuable_laps.empty:
-        fastest_lap = valuable_laps['LapTime'].min()
-        valuable_laps = valuable_laps[valuable_laps['LapTime'] < fastest_lap * 1.07]
+    # Filter for 'push' laps (within 107% of best time)
+    fastest = laps['LapTime'].min()
+    laps = laps[laps['LapTime'] < fastest * 1.07]
+    
+    X = laps[['TyreLife']]
+    y = laps['LapTime'].dt.total_seconds()
+    
+    model = LinearRegression().fit(X, y)
+    return X, y, model, color
 
-    # 5. Prepare the ML variables
-    X = valuable_laps[['TyreLife']] 
-    y = valuable_laps['LapTime'].dt.total_seconds()
+# Fetch both datasets
+X24, y24, model24, col24 = get_driver_data(2024, 'R', 'HAM', 'silver')
+X26, y26, model26, col26 = get_driver_data(2026, 'FP1', 'HAM', 'red')
 
-    # 6. Train the Linear Regression Model
-    model = LinearRegression()
-    model.fit(X, y)
+# --- Plotting ---
+plt.figure(figsize=(12, 7))
 
-    # 7. Visualization
-    plt.figure(figsize=(10, 6))
-    plt.scatter(X, y, color='red', label='Actual Laps (2026 Ferrari)') # Ferrari Red!
-    plt.plot(X, model.predict(X), color='black', linewidth=2, label='Degradation Trend')
+# 2024 Mercedes Data
+plt.scatter(X24, y24, color=col24, alpha=0.3, label='2024 Mercedes Laps')
+plt.plot(X24, model24.predict(X24), color=col24, linewidth=3, label='2024 Trend (Mercedes)')
 
-    plt.title('LIVE ANALYSIS: Lewis Hamilton Tyre Deg - 2026 Chinese GP (FP1)')
-    plt.xlabel('Tyre Age (Laps)')
-    plt.ylabel('Lap Time (Seconds)')
-    plt.legend()
-    plt.grid(True, linestyle='--', alpha=0.6)
+# 2026 Ferrari Data
+plt.scatter(X26, y26, color=col26, alpha=0.5, label='2026 Ferrari Laps')
+plt.plot(X26, model26.predict(X26), color=col26, linewidth=3, label='2026 Trend (Ferrari)')
 
-    # Save and Show
-    plt.savefig('tyre_plot_2026.png')
-    plt.show()
+plt.title('Hamilton Strategy Evolution: Mercedes (2024) vs. Ferrari (2026)')
+plt.xlabel('Tyre Age (Laps)')
+plt.ylabel('Lap Time (Seconds)')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
 
-    print(f"Success! Predicted pace for lap 10 of this stint: {model.predict([[10]])[0]:.3f}s")
+plt.savefig('comparison_plot.png')
+plt.show()
 
-except Exception as e:
-    print(f"Data is likely still processing on F1 servers. Error: {e}")
-    print("TIP: If it's a 'DataNotLoadedError', try again in 15-20 minutes!")
+print(f"2024 Deg Rate: {model24.coef_[0]:.3f}s/lap")
+print(f"2026 Deg Rate: {model26.coef_[0]:.3f}s/lap")

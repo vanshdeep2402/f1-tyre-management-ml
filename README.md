@@ -8,7 +8,7 @@
   <img src="https://media.tenor.com/4H6TsnxQAvMAAAAM/lewis-hamilton-formula-1.gif" width="250">
 
 </p>
-
+![Era Comparison](comparison_plot.png)
 <div align="center">
 
 ![F1](https://img.shields.io/badge/Formula_1-FF1801?style=for-the-badge&logo=formula1&logoColor=white) 
