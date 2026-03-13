@@ -6,6 +6,7 @@
 
 <p align="center">
   <img src="https://media.tenor.com/4H6TsnxQAvMAAAAM/lewis-hamilton-formula-1.gif" width="300">
+  <img src="https://media.tenor.com/4H6TsnxQAvMAAAAM/lewis-hamilton-formula-1.gif" width="300">
 </p>
 
 <div align="center">
