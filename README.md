@@ -3,21 +3,17 @@
 # 🏎️ Hamilton: The Ferrari Era Predictor
 
 ### *Real-Time AI Strategy for the 2026 Chinese GP*
+
 <p align="center">
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXhieXJ6emRxeWV4eHhxeXh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" width="600">
 </p>
-![F1](https://img.shields.io/badge/Formula_1-FF1801?style=for-the-badge&logo=formula1&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+<div align="center">
+
+![F1](https://img.shields.io/badge/Formula_1-FF1801?style=for-the-badge&logo=formula1&logoColor=white) 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) 
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 
----
-
-## 📊 Live Performance Analysis
-![Tyre Degradation Plot](tyre_plot.png)
-
-*“It’s not just about speed; it’s about how long you can keep that speed.”*
-
----
 </div>
 
 ### 🧠 The Mission
