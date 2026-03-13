@@ -4,7 +4,7 @@
 ### *Real-Time AI Strategy for the 2026 Chinese GP*
 
 <p align="center">
-  <img src="https://media.tenor.com/b2jBft1FOzkAAAAM/leweh-lewis-hamilton.gif">
+  <img src="https://media.tenor.com/b2jBft1FOzkAAAAM/leweh-lewis-hamilton.gif" width="250">
 </p>
 
 ![Era Comparison](comparison_plot.png)
