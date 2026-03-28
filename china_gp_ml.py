@@ -1,55 +1,44 @@
 import fastf1
-import pandas as pd
-from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-import os
+import matplotlib.cm as cm
+import numpy as np
 
-# 1. Setup Cache
-if not os.path.exists('f1_cache'):
-    os.makedirs('f1_cache')
 fastf1.Cache.enable_cache('f1_cache')
 
-# 2. Set Session (Suzuka 2026 Qualifying)
-YEAR = 2026
-LOCATION = 'Suzuka'
-SESSION = 'Q' 
-
-print(f"🏎️ Loading {LOCATION} {YEAR} {SESSION} Data...")
-session = fastf1.get_session(YEAR, LOCATION, SESSION)
+# 1. Load Suzuka 2026 Qualifying
+session = fastf1.get_session(2026, 'Suzuka', 'Q')
 session.load()
 
-# 3. Define the Grid Leaders + LH44
-drivers = ['ANT', 'RUS', 'PIA', 'LEC', 'HAM']
-colors = ['cyan', 'silver', 'orange', 'red', 'darkred']
+# 2. Pick Hamilton's fastest lap
+fastest_lap = session.laps.pick_driver('HAM').pick_fastest()
+telemetry = fastest_lap.get_telemetry()
 
-plt.figure(figsize=(12, 7))
+# 3. Create the Track Map
+x = telemetry['X']
+y = telemetry['Y']
+color = telemetry['Speed'] # This creates the "Heatmap"
 
-print("📊 Analyzing tyre degradation trends...")
-for drv, col in zip(drivers, colors):
-    # Filter for the driver's accurate laps
-    laps = session.laps.pick_driver(drv).pick_accurate()
-    
-    if not laps.empty:
-        # We use TyreLife to see how the car behaves as the rubber wears out
-        X = laps[['TyreLife']]
-        y = laps['LapTime'].dt.total_seconds()
-        
-        # Train our AI Model
-        model = LinearRegression().fit(X, y)
-        deg_rate = model.coef_[0]
-        
-        # Plot the Trend Line
-        plt.plot(X, model.predict(X), color=col, linewidth=3, label=f'{drv} ({deg_rate:.3f}s/lap)')
-        plt.scatter(X, y, color=col, alpha=0.3)
+points = np.array([x, y]).T.reshape(-1, 1, 2)
+segments = np.concatenate([points[:-1], points[1:]], axis=1)
 
-# 4. Styling the "Winner Prediction" Graph
-plt.title(f'Winner Prediction: {LOCATION} GP 2026 (Tyre Deg Analysis)', fontsize=15)
-plt.xlabel('Tyre Age (Laps)')
-plt.ylabel('Lap Time (Seconds)')
-plt.legend(title="Driver (Degradation Rate)")
-plt.grid(True, linestyle='--', alpha=0.6)
+# 4. Plotting
+fig, ax = plt.subplots(figsize=(12, 12), facecolor='black')
+plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
+ax.axis('off')
 
-# Save for your GitHub
-plt.savefig('japan_winner_prediction.png')
-print("✅ Analysis Complete! Check 'japan_winner_prediction.png'")
+# Create a continuous line with a color gradient
+from matplotlib.collections import LineCollection
+lc = LineCollection(segments, cmap=cm.plasma, norm=plt.Normalize(color.min(), color.max()))
+lc.set_array(color)
+lc.set_linewidth(5)
+line = ax.add_collection(lc)
+
+# Add a Colorbar to show speed
+cbar = fig.colorbar(line, ax=ax)
+cbar.set_label('Speed (km/h)', color='white')
+cbar.ax.yaxis.set_tick_params(color='white')
+plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='white')
+
+plt.title(f'Lewis Hamilton: Suzuka 2026 Speed Map', color='white', fontsize=20)
+plt.savefig('track_heatmap.png', facecolor='black')
 plt.show()

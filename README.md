@@ -10,6 +10,10 @@
 
 <p align="center">
   <img src="https://www.bing.com/th/id/OGC.b2ea9f99bdbd24038e381c9b9995311a?o=7&pid=1.7&rm=3&rurl=https%3a%2f%2fmedia.tenor.com%2fb2jBft1FOzkAAAAM%2fleweh-lewis-hamilton.gif&ehk=JOZRUDP2DQ5C1KGiQfFvgv3TRe1Q5RAnMCPexrvvM%2bM%3d" width="250" alt="Hamilton Ferrari GIF">
+  ## 🗺️ Visual Telemetry: Suzuka Heatmap
+![Track Heatmap](track_heatmap.png)
+*This heatmap shows exactly where LH44 is finding the limit in the 'S' Curves.*
+
 </p>
 
 ---
