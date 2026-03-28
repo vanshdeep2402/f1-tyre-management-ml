@@ -1,35 +1,60 @@
 <div align="center">
 
-# 🏎️ Hamilton: The Ferrari Era Predictor
-### *Real-Time AI Strategy for the 2026 Chinese GP*
+# 🏎️ F1 Tyre Strategy Predictor: The Hamilton-Ferrari Era
+### *Real-Time Machine Learning Analysis for the 2026 Chinese GP*
+
+![F1](https://img.shields.io/badge/Formula_1-FF1801?style=for-the-badge&logo=formula1&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 <p align="center">
-  <img src="https://media.tenor.com/b2jBft1FOzkAAAAM/leweh-lewis-hamilton.gif" width="250">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXhieXJ6emRxeWV4eHhxeXh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif" width="600" alt="Hamilton Ferrari GIF">
 </p>
 
-![Era Comparison](comparison_plot.png)
-<div align="center">
+---
 
-![F1](https://img.shields.io/badge/Formula_1-FF1801?style=for-the-badge&logo=formula1&logoColor=white) 
-![Python](https://img.shields.io/badge/Python-EF1A2D?style=for-the-badge&logo=python&logoColor=white) 
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+## 📊 Live Comparative Analysis
+![Compound Analysis](compound_comparison.png)
 
+*“In F1, speed is a given. Strategy is the variable.”*
+
+---
 </div>
 
-### 🧠 The Mission
-As a 3rd-year AI student at GBU, I built this to predict when **Lewis Hamilton's** Ferrari tyres will "hit the cliff" in Shanghai. This model uses **Linear Regression** to turn raw telemetry into strategy.
+## 🧠 Project Overview
+As a 3rd-year B.Tech AI student at Gautam Buddha University, I developed this tool to decode the "Tyre Cliff." By leveraging the **FastF1 API** and **Scikit-Learn**, this project analyzes Lewis Hamilton's performance as he transitions into the 2026 Ferrari era.
 
-### 🛠️ Engineering Stack
-- **API:** FastF1 (Live Telemetry)
-- **ML Engine:** Scikit-Learn Linear Regression
-- **Visuals:** Matplotlib & Custom Markdown Shields
+### 🎯 Key Features
+- **Multi-Compound Modeling:** Compares degradation rates between **Soft (Red)** and **Medium (Yellow)** compounds.
+- **Cross-Era Benchmarking:** Analyzes 2024 Mercedes telemetry against live 2026 Ferrari FP1 data.
+- **Noise Reduction:** Implemented a 107% lap-time filter to eliminate "dirty air" and pit-sequence outliers.
+
+## 🛠️ Tech Stack
+- **AI/ML:** Linear Regression (Scikit-Learn)
+- **Data:** FastF1 API, Pandas, NumPy
+- **Visuals:** Matplotlib (Custom F1 Theme)
+- **Version Control:** Git/GitHub
+
+## 🏁 Strategy Insights
+| Compound | Initial Pace | Degradation Slope | Stint Potential |
+| :--- | :--- | :--- | :--- |
+| **Soft (C4)** | High Grip | Steeper (+0.12s/lap) | Aggressive / Short |
+| **Medium (C3)** | Balanced | Moderate (+0.05s/lap) | Optimal Race Pace |
 
 ---
 
 <details>
-<summary><b>📂 Click to see Technical Details</b></summary>
+<summary><b>📂 Technical Implementation Details</b></summary>
 
-- **Filtering:** 107% Lap-Time Rule (removes slow warm-up laps)
-- **Dataset:** Live 2026 FP1 vs 2024 Historical Data
-- **Host:** GitHub Pages / Portfolio
-</details>
+### Data Pipeline:
+1. **Cache Management:** Uses `fastf1.Cache` to minimize API calls.
+2. **Feature Engineering:** Extracts `TyreLife` and `LapTime` (converted to total seconds).
+3. **Linear Fit:** Calculates the coefficient of degradation to predict "the cliff."
+
+### How to Run:
+```bash
+git clone [https://github.com/vanshdeep2402/f1-tyre-management-ml.git](https://github.com/vanshdeep2402/f1-tyre-management-ml.git)
+pip install fastf1 scikit-learn matplotlib pandas
+python china_gp_ml.py
+
