@@ -20,8 +20,7 @@
 ---
 
 ## 📊 Live Comparative Analysis
-![Compound Analysis](compound_comparison.png)
-
+![Compound Analysis](japan_winner_prediction.png)
 *“In F1, speed is a given. Strategy is the variable.”*
 
 ---
