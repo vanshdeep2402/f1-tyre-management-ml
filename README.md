@@ -9,7 +9,7 @@
 ![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 <p align="center">
-  <img src="https://www.bing.com/th/id/OGC.b2ea9f99bdbd24038e381c9b9995311a?o=7&pid=1.7&rm=3&rurl=https%3a%2f%2fmedia.tenor.com%2fb2jBft1FOzkAAAAM%2fleweh-lewis-hamilton.gif&ehk=JOZRUDP2DQ5C1KGiQfFvgv3TRe1Q5RAnMCPexrvvM%2bM%3d" width="600" alt="Hamilton Ferrari GIF">
+  <img src="https://www.bing.com/th/id/OGC.b2ea9f99bdbd24038e381c9b9995311a?o=7&pid=1.7&rm=3&rurl=https%3a%2f%2fmedia.tenor.com%2fb2jBft1FOzkAAAAM%2fleweh-lewis-hamilton.gif&ehk=JOZRUDP2DQ5C1KGiQfFvgv3TRe1Q5RAnMCPexrvvM%2bM%3d" width="250" alt="Hamilton Ferrari GIF">
 </p>
 
 ---
